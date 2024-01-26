@@ -12,12 +12,12 @@ WORKDIR /app
 
 # create a layer for dependencies to take advantage of Docker layer caching,
 # since dependencies will change less often than source code
-COPY package.json package-lock.json ./
+COPY --chown=node package.json package-lock.json ./
 # npm ci is like npm install but more strict: makes a clean install and prevents modifying package-lock.json
 RUN npm ci
 
 # source code
-COPY ./ ./
+COPY --chown=node ./ ./
 
 # port
 EXPOSE 8080
