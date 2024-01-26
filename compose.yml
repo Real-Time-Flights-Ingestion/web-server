@@ -1,0 +1,9 @@
+name: real-time-flights-ingestion
+
+services:
+  web-server:
+    image: rtfi/web-server:latest
+    container_name: web-server
+    build: ./
+    ports:
+      - 8080:8080
