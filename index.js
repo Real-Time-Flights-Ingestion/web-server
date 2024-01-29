@@ -48,20 +48,70 @@ const airports = deepFreeze({
         }
     },
     fiumicino: {
-        icao: "LIRF"
+        icao: "LIRF",
+        iata: "FCO",
+        shortName: "Leonardo da Vinci-Fiumicino",
+        fullName: "Rome Leonardo da Vinci-Fiumicino",
+        municipalityName: "Rome",
+        location: {
+            lat: 41.8045,
+            lon: 12.2508
+        },
+        elevation: {
+            meter: 4.57,
+            km: 0,
+            mile: 0,
+            nm: 0,
+            feet: 15
+        },
+        country: {
+            code: "IT",
+            name: "Italy"
+        },
+        continent: {
+            code: "EU",
+            name: "Europe"
+        },
+        timeZone: "Europe/Rome",
+        urls: {
+            webSite: "http://www.adr.it/web/aeroporti-di-roma-en-",
+            wikipedia: "https://en.wikipedia.org/wiki/Leonardo_da_Vinci%E2%80%93Fiumicino_Airport",
+            twitter: "http://twitter.com/AeroportidiRoma",
+            googleMaps: "https://www.google.com/maps/@41.804500,12.250800,14z",
+            flightRadar: "https://www.flightradar24.com/41.80,12.25/14"
+        }
     },
     atalanta: {
         icao: "KATL"
     }
 })
 
-const apiKey = process.env.API_KEY
+const host = "aerodatabox.p.rapidapi.com"
+var settings_setup = {
+    api: {
+        host: host,
+        endpoint: "https://" + host,
+        key: null
+    }
+}
 
-const url = "https://aerodatabox.p.rapidapi.com/airports/icao/" + airports.fiumicino.icao
+const fs = require('node:fs')
+try {
+    settings_setup.api.key = fs.readFileSync("/run/secrets/api_key", "utf8")
+} catch (err) {
+    console.error(err)
+    process.exit(1)
+}
+
+const settings = deepFreeze(settings_setup)
+
+console.log("settings", settings)
+
+const url = settings.api.endpoint + "/airports/icao/" + airports.atalanta.icao
 const options = {
     headers: {
-        "X-RapidAPI-Key": apiKey,
-        "X-RapidAPI-Host": "aerodatabox.p.rapidapi.com"
+        "X-RapidAPI-Key": settings.api.key,
+        "X-RapidAPI-Host": settings.api.host
     }
 }
 

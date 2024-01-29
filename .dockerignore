@@ -4,3 +4,6 @@
 # Docker files
 .dockerignore
 Dockerfile
+
+# secrets
+api_key
