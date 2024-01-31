@@ -1,5 +1,8 @@
 "use strict";
 
+import * as fs from 'node:fs';
+import { deepFreeze } from './utils.js';
+
 const host = "aerodatabox.p.rapidapi.com"
 
 const settings_setup = {
@@ -10,11 +13,12 @@ const settings_setup = {
     },
     server: {
         host: "0.0.0.0",
-        port: process.env.PORT
+        port: process.env.PORT,
+        trailingSlashNormalization: true,
+        aerodataboxWebhookEndpoint: "/adb/api"
     }
 }
 
-import * as fs from 'node:fs';
 try {
     settings_setup.api.key = fs.readFileSync("/run/secrets/api_key", "utf8")
 } catch (err) {
@@ -22,7 +26,6 @@ try {
     process.exit(1)
 }
 
-import { deepFreeze } from './utils.js';
 const settings = deepFreeze(settings_setup)
 
 export default settings

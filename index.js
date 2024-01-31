@@ -8,5 +8,5 @@ console.log("settings:", settings)
 server.listen(
     settings.server.port,
     settings.server.host,
-    () => console.log(`server started on ${settings.server.port}:${settings.server.host}`)
+    () => console.log(`server started on ${settings.server.host}:${settings.server.port}`)
 )
