@@ -1,5 +1,6 @@
 "use strict";
 
+import settings from './settings.js';
 import { deepFreeze } from './utils.js';
 
 const airports = deepFreeze({
@@ -107,5 +108,28 @@ const airports = deepFreeze({
         }
     }
 })
+
+export async function fetchAirportDetails(icao) {
+    const response = await fetch(
+        settings.api.endpoint + "/airports/icao/" + icao,
+        {
+            headers: {
+                "X-RapidAPI-Key": settings.api.key,
+                "X-RapidAPI-Host": settings.api.host
+            }
+        }
+    )
+    const result = await response.json()
+    return result
+}
+
+export async function printAirportDetails(icao) {
+    try {
+        const result = await fetchAirportDetails(icao)
+        console.log("Airport details:", JSON.stringify(result, null, 4))
+    } catch (error) {
+        console.error(error)
+    }
+}
 
 export default airports
