@@ -7,6 +7,10 @@ const settings_setup = {
         host: host,
         endpoint: "https://" + host,
         key: null
+    },
+    server: {
+        host: "0.0.0.0",
+        port: process.env.PORT
     }
 }
 

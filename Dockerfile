@@ -1,6 +1,9 @@
 # use current release
 FROM node:21.6
 
+# build arguments
+ARG PORT=8080
+
 # set NODE_ENV production before npm install to avoid installing dev dependencies
 ENV NODE_ENV production
 # verbose by default
@@ -20,6 +23,7 @@ RUN npm ci
 COPY --chown=node ./ ./
 
 # port
-EXPOSE 8080
+ENV PORT=$PORT
+EXPOSE $PORT
 
 CMD [ "npm", "start" ]
