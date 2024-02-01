@@ -3,19 +3,23 @@
 import * as fs from 'node:fs';
 import { deepFreeze } from './utils.js';
 
-const host = "aerodatabox.p.rapidapi.com"
+const apiHost = "aerodatabox.p.rapidapi.com"
+const domain = "rtfi.servehttp.com"
+const aerodataboxWebhookEndpoint = "/adb/api"
 
 const settings_setup = {
     api: {
-        host: host,
-        endpoint: "https://" + host,
+        host: apiHost,
+        endpoint: "https://" + apiHost,
         key: null
     },
     server: {
         host: "0.0.0.0",
+        domain: domain,
         port: process.env.PORT,
         trailingSlashNormalization: true,
-        aerodataboxWebhookEndpoint: "/adb/api"
+        aerodataboxWebhookEndpoint: aerodataboxWebhookEndpoint,
+        webhookUrl: "http://" + domain + ":" + process.env.PORT + aerodataboxWebhookEndpoint
     }
 }
 
