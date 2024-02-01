@@ -48,7 +48,7 @@ export async function subscribeToAirport(icao) {
                 ...headers,
                 "Content-Type": "application/json"
             },
-            body: { url: settings.server.webhookUrl }
+            body: `{"url": "${settings.server.webhookUrl}"}`
         }
     )
     if (response.ok && response.status !== 204) {

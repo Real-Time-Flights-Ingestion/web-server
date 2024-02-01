@@ -51,7 +51,7 @@ function requestListener(req, res) {
             function (body) {
                 try {
                     body = JSON.parse(body)
-                    console.log("Received:", body)
+                    console.log("Received:", JSON.stringify(body, null, 4))
                 } catch (error) {
                     // error is instance of SyntaxError
                     console.error("JSON parsing error:", error, body)
