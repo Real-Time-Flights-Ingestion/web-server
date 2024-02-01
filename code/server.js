@@ -36,10 +36,16 @@ function requestBody(incomingMessage) {
     })
 }
 
+function isAdbRequest(incomingMessage) {
+    return pathMatches(incomingMessage.url, settings.server.aerodataboxWebhookEndpoint) &&
+        incomingMessage.method === "POST" &&
+        incomingMessage.headers["content-type"] === "application/json"
+}
+
 function requestListener(req, res) {
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || null
+    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null
     var status = 404
-    if (pathMatches(req.url, settings.server.aerodataboxWebhookEndpoint)) {
+    if (isAdbRequest(req)) {
         status = 200
         requestBody(req).then(
             function (body) {
