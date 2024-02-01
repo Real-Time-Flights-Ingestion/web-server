@@ -4,12 +4,15 @@ services:
   web-server:
     image: rtfi/web-server:latest
     container_name: web-server
-    build: ./
+    build:
+      context: ./
+      args:
+        - PORT=49153
     secrets:
       - source: api-key
         target: api_key # mounted to /run/secrets/api_key
     ports:
-      - 8080:8080
+      - 49153:49153
 
 secrets:
   api-key:
