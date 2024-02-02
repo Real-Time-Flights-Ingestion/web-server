@@ -4,25 +4,25 @@ import settings from './code/settings.js'
 import server from './code/server.js'
 import kafkaProducer from './code/kafka.js'
 
-console.log("settings:", settings)
+console.log("[startup] settings:", settings)
 
 kafkaProducer.connect().then(() => {
-    console.log("Kafka connection successful")
+    console.log("[startup] Kafka connection successful")
     server.listen(
         settings.server.port,
         settings.server.host,
-        () => console.log(`server started on ${settings.server.host}:${settings.server.port}`)
+        () => console.log(`[startup] server started on ${settings.server.host}:${settings.server.port}`)
     )
     server.on("close", async () => {
-        console.log("Server closed")
+        console.log("[shutdown] Server closed")
         await kafkaProducer.disconnect()
-        console.log("Kafka disconnected")
+        console.log("[shutdown] Kafka disconnected")
     })
 }).catch((error) => {
-    console.error("Kafka connection error:", error)
+    console.error("[error] Kafka connection error:", error)
 })
 
-process.on("SIGTERM", () => {
-    console.log("SIGTERM received")
+process.on("[shutdown] SIGTERM", () => {
+    console.log("[shutdown] SIGTERM received")
     server.close(() => process.exit())
 })

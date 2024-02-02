@@ -19,7 +19,7 @@ export function airportIcaoToTopic(icao) {
 export function flightsToKafkaFlights(flights) {
     var kafkaFlights = []
     for (let flight of flights) {
-        console.log("sending to Kafka flight", flight.number)
+        console.log("[kafka] sending to Kafka flight", flight.number)
         kafkaFlights.push({
             key: flight.number,
             value: JSON.stringify(flight)

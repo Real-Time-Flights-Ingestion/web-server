@@ -31,7 +31,7 @@ const settings_setup = {
 try {
     settings_setup.api.key = fs.readFileSync("/run/secrets/api_key", "utf8")
 } catch (err) {
-    console.error(err)
+    console.error("[error] Api key read error:", err)
     process.exit(1)
 }
 

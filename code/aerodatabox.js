@@ -28,13 +28,13 @@ export async function fetchAirportDetails(icao) {
 export async function printAirportDetails(icao) {
     try {
         const result = await fetchAirportDetails(icao)
-        console.log("Airport details:", JSON.stringify(result, null, 4))
+        console.log("[fetch] Airport details:", JSON.stringify(result, null, 4))
     } catch (error) {
         if (error instanceof SyntaxError) {
             // JSON parsing error
-            console.error("JSON parsing error:", error)
+            console.error("[error] JSON parsing error:", error)
         } else {
-            console.error("Fetch error:", error)
+            console.error("[error] Fetch error:", error)
         }
     }
 }
@@ -67,13 +67,13 @@ export async function subscribeToAirport(icao) {
 export async function printSubscribeToAirport(icao) {
     try {
         const result = subscribeToAirport(icao)
-        console.log("Subscription details:", JSON.stringify(result, null, 4))
+        console.log("[fetch] Subscription details:", JSON.stringify(result, null, 4))
     } catch (error) {
         if (error instanceof SyntaxError) {
             // JSON parsing error
-            console.error("JSON parsing error:", error)
+            console.error("[error] JSON parsing error:", error)
         } else {
-            console.error("Fetch error:", error)
+            console.error("[error] Fetch error:", error)
         }
     }
 }

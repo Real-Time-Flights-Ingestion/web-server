@@ -53,17 +53,17 @@ function requestListener(req, res) {
             function (body) {
                 try {
                     body = JSON.parse(body)
-                    console.log("Received:", JSON.stringify(body, null, 4))
+                    console.log("[request] Received:", JSON.stringify(body, null, 4))
                     var flights = body["flights"]
                     if (flights) {
                         sendFlights(airports.luxembourg.icao, flights)
                     }
                 } catch (error) {
                     // error is instance of SyntaxError
-                    console.error("JSON parsing error:", error, body)
+                    console.error("[error] JSON parsing error:", error, body)
                 }
             }
-        ).catch((error) => console.error("Request read error:", error))
+        ).catch((error) => console.error("[error] Request read error:", error))
     }
     res.writeHead(status)
     res.end()
