@@ -1,8 +1,8 @@
-"use strict";
+"use strict"
 
-import settings from './code/settings.js';
-import server from './code/server.js';
-import kafkaProducer from './code/kafka.js';
+import settings from './code/settings.js'
+import server from './code/server.js'
+import kafkaProducer from './code/kafka.js'
 
 console.log("settings:", settings)
 

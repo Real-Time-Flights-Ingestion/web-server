@@ -1,7 +1,7 @@
-"use strict";
+"use strict"
 
-import * as fs from 'node:fs';
-import { deepFreeze } from './utils.js';
+import * as fs from 'node:fs'
+import { deepFreeze } from './utils.js'
 
 const apiHost = "aerodatabox.p.rapidapi.com"
 const domain = "rtfi.servehttp.com"

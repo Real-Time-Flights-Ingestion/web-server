@@ -1,9 +1,9 @@
-"use strict";
+"use strict"
 
-import * as http from 'node:http';
-import settings from './settings.js';
-import airports from './airports.js';
-import { sendFlights } from './kafka.js';
+import * as http from 'node:http'
+import settings from './settings.js'
+import airports from './airports.js'
+import { sendFlights } from './kafka.js'
 
 const pathMatches = function () {
     if (settings.server.trailingSlashNormalization) {
@@ -70,6 +70,6 @@ function requestListener(req, res) {
     console.log(`[request] ${ip} ${req.method} ${req.headers.host}${req.url} ${status}`)
 }
 
-const server = http.createServer(requestListener);
+const server = http.createServer(requestListener)
 
 export default server

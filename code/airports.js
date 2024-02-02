@@ -1,6 +1,6 @@
-"use strict";
+"use strict"
 
-import { deepFreeze } from './utils.js';
+import { deepFreeze } from './utils.js'
 
 const airports = deepFreeze({
     luxembourg: {
