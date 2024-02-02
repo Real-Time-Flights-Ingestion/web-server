@@ -2,6 +2,8 @@
 
 import * as http from 'node:http';
 import settings from './settings.js';
+import airports from './airports.js';
+import { sendFlights } from './kafka.js';
 
 const pathMatches = function () {
     if (settings.server.trailingSlashNormalization) {
@@ -52,6 +54,10 @@ function requestListener(req, res) {
                 try {
                     body = JSON.parse(body)
                     console.log("Received:", JSON.stringify(body, null, 4))
+                    var flights = body["flights"]
+                    if (flights) {
+                        sendFlights(airports.luxembourg.icao, flights)
+                    }
                 } catch (error) {
                     // error is instance of SyntaxError
                     console.error("JSON parsing error:", error, body)
