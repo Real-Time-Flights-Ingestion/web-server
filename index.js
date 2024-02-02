@@ -24,5 +24,5 @@ kafkaProducer.connect().then(() => {
 
 process.on("SIGTERM", () => {
     console.log("SIGTERM received")
-    server.close()
+    server.close(() => process.exit())
 })
