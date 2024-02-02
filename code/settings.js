@@ -20,6 +20,10 @@ const settings_setup = {
         trailingSlashNormalization: true,
         aerodataboxWebhookEndpoint: aerodataboxWebhookEndpoint,
         webhookUrl: "http://" + domain + ":" + process.env.PORT + aerodataboxWebhookEndpoint
+    },
+    kafka: {
+        clientId: "web-server",
+        brokers: ["kafka:9092"]
     }
 }
 

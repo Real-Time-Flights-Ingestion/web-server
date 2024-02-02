@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Real-Time-Flights-Ingestion/web-server/issues"
   },
-  "homepage": "https://github.com/Real-Time-Flights-Ingestion/web-server#readme"
+  "homepage": "https://github.com/Real-Time-Flights-Ingestion/web-server#readme",
+  "dependencies": {
+    "kafkajs": "^2.2.4"
+  }
 }
