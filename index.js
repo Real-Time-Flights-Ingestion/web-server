@@ -21,3 +21,8 @@ kafkaProducer.connect().then(() => {
 }).catch((error) => {
     console.error("Kafka connection error:", error)
 })
+
+process.on("SIGTERM", () => {
+    console.log("SIGTERM received")
+    server.close()
+})

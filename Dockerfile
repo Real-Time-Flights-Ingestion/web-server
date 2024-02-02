@@ -26,4 +26,4 @@ COPY --chown=node ./ ./
 ENV PORT=$PORT
 EXPOSE $PORT
 
-CMD [ "npm", "start" ]
+CMD [ "node", "index.js" ]
