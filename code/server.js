@@ -2,7 +2,6 @@
 
 import * as http from 'node:http'
 import settings from './settings.js'
-import airports from './airports.js'
 import { sendFlights } from './kafka.js'
 
 const pathMatches = function () {
@@ -44,6 +43,16 @@ function isAdbRequest(incomingMessage) {
         incomingMessage.headers["content-type"] === "application/json"
 }
 
+function sendToKafka(body) {
+    const flights = body["flights"]
+    if (flights) {
+        const subscription = body["subscription"]
+        const icao = subscription["subject"]["id"]
+        const id = subscription["id"]
+        sendFlights(icao, flights, id)
+    }
+}
+
 function requestListener(req, res) {
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null
     var status = 404
@@ -54,13 +63,14 @@ function requestListener(req, res) {
                 try {
                     body = JSON.parse(body)
                     console.log("[request] Received:", JSON.stringify(body, null, 4))
-                    var flights = body["flights"]
-                    if (flights) {
-                        sendFlights(airports.luxembourg.icao, flights)
-                    }
+                    sendToKafka(body)
                 } catch (error) {
-                    // error is instance of SyntaxError
-                    console.error("[error] JSON parsing error:", error, body)
+                    if (error instanceof SyntaxError) {
+                        // JSON parsing error
+                        console.error("[error] JSON parsing error:", error, body)
+                    } else {
+                        console.error("[error] Kafka send error:", error)
+                    }
                 }
             }
         ).catch((error) => console.error("[error] Request read error:", error))
