@@ -81,5 +81,6 @@ export async function printSubscribeToAirport(icao) {
 export default {
     fetchAirportDetails,
     printAirportDetails,
-    subscribeToAirport
+    subscribeToAirport,
+    printSubscribeToAirport
 }
