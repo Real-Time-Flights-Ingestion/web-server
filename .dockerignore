@@ -4,6 +4,7 @@
 # Docker files
 .dockerignore
 Dockerfile
+compose.yml
 
 # secrets
 api_key
