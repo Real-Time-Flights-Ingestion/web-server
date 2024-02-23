@@ -27,7 +27,8 @@ export function flightsToKafkaFlights(flights, subscriptionId) {
                 "source": settings.api.endpoint,
                 "receiver": "rtfi/web-server",
                 "receiver_url": settings.server.webhookUrl,
-                "subscription_id": subscriptionId
+                "subscription_id": subscriptionId,
+                "ingestion_timestamp": (new Date(Date.now())).toISOString(),
             }
         })
     }
