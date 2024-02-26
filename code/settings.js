@@ -23,7 +23,7 @@ const settings_setup = {
     },
     kafka: {
         clientId: "web-server",
-        brokers: ["kafka:9092"],
+        brokers: ["kafka-0:9092", "kafka-1:9092", "kafka-2:9092"],
         topicPrefix: "rtfi."
     }
 }
